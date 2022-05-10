@@ -34,3 +34,4 @@ atomic_mass=$($PSQL  "SELECT atomic_mass FROM properties where atomic_number=$at
 melting_point=$($PSQL  "SELECT melting_point_celsius FROM properties WHERE atomic_number=$atomic_number")
 boiling_point=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number=$atomic_number")
 echo "The element with atomic number "$atomic_number" is "$name" ("$symbol"). It's a "$type", with a mass of "$atomic_mass" amu. Hydrogen has a melting point of "$melting_point" celsius and a boiling point of "$boiling_point" celsius."
+ffg
