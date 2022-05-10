@@ -43,7 +43,8 @@ else
  atomic_number=$($PSQL "SELECT atomic_number FROM elements WHERE name='$name'")
 fi
 
-type=$($PSQL  "SELECT  type FROM properties WHERE atomic_number=$atomic_number")
+type_id=$($PSQL "SELECT type_id FROM properties WHERE  atomic_number="$atomic_number"")
+type=$($PSQL "SELECT type FROM types WHERE type_id="$type_id"")
 atomic_mass=$($PSQL  "SELECT atomic_mass FROM properties where atomic_number=$atomic_number")
 melting_point=$($PSQL  "SELECT melting_point_celsius FROM properties WHERE atomic_number=$atomic_number")
 boiling_point=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number=$atomic_number")
