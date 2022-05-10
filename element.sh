@@ -15,19 +15,33 @@ if [[ $1 =~ [0-9] ]]
 then
  atomic_number=$1
  name=$($PSQL "SELECT name FROM elements WHERE atomic_number=$atomic_number")
+ if [[ -z $name ]]
+ then 
+  echo "I could not find that element in the database."
+  exit
+ fi
  symbol=$($PSQL "SELECT symbol FROM elements WHERE atomic_number=$atomic_number")
 elif [[ ${#str} == 1 || ${#str} == 2 ]]
 then
  symbol=$1
  name=$($PSQL "SELECT name FROM elements WHERE symbol='$symbol'")
+ if [[ -z $name ]]
+ then
+  echo "I could not find that element in the database."
+  exit
+ fi
  atomic_number=$($PSQL "SELECT atomic_number FROM elements WHERE symbol='$symbol'")
  
 else
  name=$1
  symbol=$($PSQL "SELECT symbol FROM elements WHERE name='$name'")
+ if [[ -z $symbol ]]
+ then 
+  echo "I could not find that element in the database."
+  exit
+ fi
  atomic_number=$($PSQL "SELECT atomic_number FROM elements WHERE name='$name'")
 fi
-
 
 type=$($PSQL  "SELECT  type FROM properties WHERE atomic_number=$atomic_number")
 atomic_mass=$($PSQL  "SELECT atomic_mass FROM properties where atomic_number=$atomic_number")
